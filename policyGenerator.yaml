@@ -1,0 +1,27 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: policy-openshift-gitops-install
+placementBindingDefaults:
+  name: "gitops-install-binding"
+policyDefaults:
+  categories:
+    - CM Configuration Management
+  controls:
+    - CM-2 Baseline Configuration
+  namespace: acm-install-policies
+  policySets:
+    - openshift-gitops-install
+  remediationAction: enforce
+  severity: medium
+policies:
+  - name: gitops-operator-subscription
+    manifests:
+      - path: gitops-operator/gitops-subscription.yaml
+    policySets:
+      - openshift-gitops
+policySets:
+  - description: The OpenShift GitOps policy set installs the OpenShift GitOps operator on target clusters.
+    name: openshift-gitops
+    placement:
+      placementRulePath: placements/gitops-placement.yaml
