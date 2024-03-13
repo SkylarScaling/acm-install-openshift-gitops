@@ -20,6 +20,12 @@ policies:
       - path: gitops-operator/gitops-subscription.yaml
     policySets:
       - openshift-gitops
+  - name: gitops-operator-status
+    manifests:
+      - path: gitops-operator/gitops-operator-status.yaml
+    policySets:
+      - openshift-gitops
+    remediationAction: inform
 policySets:
   - description: The OpenShift GitOps policy set installs the OpenShift GitOps operator on target clusters.
     name: openshift-gitops
